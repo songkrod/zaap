@@ -1,0 +1,132 @@
+html, body, div
+{
+	margin: 0;
+	padding: 0;
+}
+
+#wrap
+{
+	top: 50%;
+	left: 50%;
+	width: 1280px;
+	height: 960px;
+	position: fixed;
+}
+
+#wrap .container
+{
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	display: none;
+	position: absolute;
+	background: center center no-repeat;
+	background-size: cover;
+}
+
+#scene1
+{
+	width: 55%;
+	height: 20%;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	margin: auto;
+	position: absolute;
+}
+
+#scene1 img
+{
+	position: absolute;
+}
+
+#scene1 .font-z
+{
+	left: 0%;
+	height: 90%;
+}
+
+#scene1 .font-a1
+{
+	left: 22%;
+	height: 90%;
+}
+
+#scene1 .font-a2
+{
+	top: -20%;
+	left: 48%;
+	height: 110%;
+}
+
+#scene1 .font-p
+{
+	left: 74%;
+	height: 120%;
+}
+
+#scene1 .font-caption
+{
+	left: 10%;
+	bottom: -20%;
+	height: 30px;
+}
+
+#cscene2 .menu
+{
+	top: 30%;
+	width: 350px;
+	height: 350px;
+	position: absolute;
+	cursor: pointer;
+}
+
+#cscene2 .menu img
+{
+	width: 100%;
+	position: absolute;
+}
+
+#cscene2 .menu .text
+{
+	width: auto;
+	height: 8%;
+	left: 0px;
+	right: 0px;
+	bottom: -20%;
+	margin: 0 auto;
+}
+
+#cscene2 .menu1
+{
+	left: 10%;
+}
+
+#cscene2 .menu1 .o2
+{
+	width: 120%;
+	left: -15%;
+	top: -20%;
+}
+
+#cscene2 .menu2
+{
+	left: 60%;
+}
+
+#cscene2 .menu2 .o1
+{
+	top: -18%;
+}
+
+#cscene2 .menu2 .o2
+{
+	top: 15%;
+	left: 0px;
+	right: 0px;
+	width: 80%;
+	margin: 0 auto;
+}

@@ -1,0 +1,191 @@
+<html>
+	<head>
+		<title>ZAAP</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script src="lib/interact.js"></script>
+		<script src="lib/jquery.min.js"></script>
+		<script src="lib/TweenMax.min.js"></script>
+		<script type="text/javascript">
+			var config = { width: 1280, height: 960 };
+			$(document).ready(function()
+			{
+				screen_resize();
+
+				setup();
+				startPlay();
+			});
+
+			function startPlay()
+			{
+				scene_intro();
+			}
+
+			function setup()
+			{
+				setup_scene_intro();
+				setup_scene_menu();
+			}
+
+			function runFunction( name )
+			{
+				var fn = window[ name ];
+				
+				if(typeof fn === 'function')
+				{
+					fn();
+				}
+			}
+
+			window.onresize = function()
+			{
+				screen_resize();
+			}
+
+			function screen_resize()
+			{
+				var s = (1/config.width) * window.innerWidth;
+
+				if ( window.innerWidth > window.innerHeight )
+				{
+					s = (1/config.height) * window.innerHeight;
+				}
+
+				TweenMax.to($("#wrap"), .2, {transformOrigin: "50% 50%", scaleX: s , scaleY: s, xPercent: -50, yPercent: -50});
+			}
+
+			function setup_scene_intro()
+			{
+				//
+			}
+
+			function setup_scene_menu()
+			{
+				$("#cscene2 .menu1").click(function()
+				{
+					endSceneMenu( "scene_intro" );
+				});
+
+				$("#cscene2 .menu2").click(function()
+				{
+					endSceneMenu( "scene_intro" );
+				});
+			}
+
+			function scene_intro()
+			{
+				$("body, #cscene1").css("background-image", "url('image/scene1/01.png')");
+
+				TweenMax.to($(".font-z"), 0, {scale: 0.5, rotation:100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($(".font-z"), 1.5, {delay: .5, scale: 1, rotation: 0, opacity: 1, ease:Elastic.easeOut});
+					TweenMax.to($("#scene1"), 5, {delay: .5, scale: 1.2});
+				}});
+
+				TweenMax.to($(".font-a1"), 0, {scale: 0.5, rotation:100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($(".font-a1"), 1.5, {delay: .7, scale: 1, rotation: 0, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($(".font-a2"), 0, {scale: 0.5, rotation:100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($(".font-a2"), 1.5, {delay: .9, scale: 1, rotation: 0, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($(".font-p"), 0, {scale: 0.5, rotation:100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($(".font-p"), 1.5, {delay: 1.1, scale: 1, rotation: 0, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($(".font-caption"), 0, {y: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($(".font-caption"), 0.8, {delay: 2, y: 0, opacity: 1, ease:Bounce.easeOut, onComplete: function()
+					{
+						endSceneIntro( "scene_menu" );
+					}});
+				}});
+
+				$("#cscene1").show().css("opacity", 1);
+			}
+
+			function endSceneIntro( next_scene )
+			{
+				TweenMax.to($("#scene1"), 1, {delay: 1.5, opacity: 0, onComplete:function ()
+				{
+					$("#cscene1").hide().css("opacity",0);
+					TweenMax.to($("#scene1"), 0, { scale: 1, opacity: 1});
+					runFunction( next_scene );
+				}});
+			}
+
+			function scene_menu()
+			{
+				$("#cscene2").show().css("opacity", 1);
+
+				TweenMax.to($("#cscene2 .menu"), 0, {scale: 0.1, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene2 .menu"), 1, {delay: 0.7, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				$("#cscene2 .menu1").hover(function()
+				{
+					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 5, ease:Elastic.easeOut });
+					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: -30, rotation: -20, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 0, ease:Elastic.easeOut });
+					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: 0, rotation: 0, ease:Elastic.easeOut });
+				});
+
+				$("#cscene2 .menu2").hover(function()
+				{
+					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 50, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 0, ease:Elastic.easeOut });
+				});
+
+				$("#cscene2 .menu").hover(function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1.5, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1, ease:Elastic.easeOut });
+				});
+			}
+
+			function endScene2( next_scene )
+			{
+				TweenMax.to($("#cscene2 .menu"), 1, {scale: 0.1, opacity: 0, onComplete:function ()
+				{
+					$("#cscene2").hide().css("opacity",0);
+					runFunction( next_scene );
+				}});
+			}
+		</script>
+	</head>
+	<body>
+		<div id="wrap">
+			<div class="container" id="cscene1">
+				<div id="scene1">
+					<img class="font-z" src="image/scene1/02.png">
+					<img class="font-a1" src="image/scene1/03.png">
+					<img class="font-a2" src="image/scene1/04.png">
+					<img class="font-p" src="image/scene1/05.png">
+					<img class="font-caption" src="image/scene1/06.png">
+				</div>
+			</div>
+			<div class="container" id="cscene2">
+				<div class="menu menu1">
+					<img class="o1" src="image/scene2/04.png">
+					<img class="o2" src="image/scene2/05.png">
+					<img class="text" src="image/scene2/06.png">
+				</div>
+				<div class="menu menu2">
+					<img class="o1" src="image/scene2/02.png">
+					<img class="o2" src="image/scene2/01.png">
+					<img class="text" src="image/scene2/03.png">
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
