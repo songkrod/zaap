@@ -9,12 +9,29 @@
 		<script src="lib/TweenMax.min.js"></script>
 		<script type="text/javascript">
 			var config = { width: 1280, height: 960 };
+			var chili_inside_index = 1;
+			var chili_spot_pos = [
+				{ top: "20%", left: "21%" },
+				{ top: "28%", left: "25%" },
+				{ top: "39%", left: "30%" },
+				{ top: "32%", left: "29%" },
+				{ top: "40%", left: "34%" },
+				{ top: "28%", left: "28%" },
+				{ top: "44%", left: "29%" },
+				{ top: "47%", left: "35%" },
+			];
+
+			var vid;
+			var chili_bg = [ "image/scene4/green1.png", "image/scene4/yellow.png", "image/scene4/green2.png", "image/scene4/green2.png", "image/scene4/orange.png", "image/scene4/pink.png", "image/scene4/pink.png", "image/scene4/yellow.png" ];
+
 			$(document).ready(function()
 			{
 				screen_resize();
 
 				setup();
 				startPlay();
+
+				vid = document.getElementById("video");
 			});
 
 			function startPlay()
@@ -27,6 +44,12 @@
 				setup_scene_intro();
 				setup_scene_menu();
 				setup_scene_chili();
+				setup_scene_chili_inside();
+			}
+
+			function setBackground( name )
+			{
+				$("body, #cscene1").css("background-image", "url('" + name + "')");
 			}
 
 			function runFunction( name )
@@ -51,6 +74,18 @@
 				if ( window.innerWidth > window.innerHeight )
 				{
 					s = (1/config.height) * window.innerHeight;
+
+					$(".vid .vid-panel video").css({
+						width: "auto",
+						height: "100%"
+					});
+				}
+				else
+				{
+					$(".vid .vid-panel video").css({
+						width: "100%",
+						height: "auto"
+					});
 				}
 
 				TweenMax.to($("#wrap"), .2, {transformOrigin: "50% 50%", scaleX: s , scaleY: s, xPercent: -50, yPercent: -50});
@@ -104,45 +139,53 @@
 			{
 				$("#cscene3 .menu1").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_1" );
+					chili_inside_index = 1;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu2").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_2" );
+					chili_inside_index = 2;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu3").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_3" );
+					chili_inside_index = 3;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu4").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_4" );
+					chili_inside_index = 4;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu5").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_5" );
+					chili_inside_index = 5;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu6").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_6" );
+					chili_inside_index = 6;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu7").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_7" );
+					chili_inside_index = 7;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
 				$("#cscene3 .menu8").click(function()
 				{
-					endSceneChiliMenu( "scene_chili_8" );
+					chili_inside_index = 8;
+					endSceneChiliMenu( "scene_chili_inside" );
 				});
 
-				$("#cscene3 .menu9 .btn-back").click(function()
+				$("#cscene3 .menu9 .btn-main").click(function()
 				{
 					endSceneChiliMenu( "scene_menu" );
 				});
@@ -164,9 +207,116 @@
 				});
 			}
 
+			function setup_scene_chili_inside()
+			{
+				$("#cscene4 .btn, .vid .btn-close").hover(function()
+				{
+					TweenMax.to($(this), 1, { scale: 1.2, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($(this), 1, { scale: 1, ease:Elastic.easeOut });
+				});
+
+				$("#cscene4 .btn-back").click(function()
+				{
+					endSceneChiliInside( "scene_chili" );
+				});
+
+				$("#cscene4 .btn-fire").click(function()
+				{
+					$(".vid").show();
+					TweenMax.fromTo( $(".vid"), 1, {scale: 0.5, opacity: 0}, {scale: 1, opacity: 1, ease:Elastic.easeOut, onComplete:function()
+					{
+						$(".vid").addClass("on-state");
+						vid.play();
+					}});
+				});
+
+				$(".vid .btn-close").click(function()
+				{
+					TweenMax.fromTo( $(".vid"), 0.3, { opacity: 1}, { opacity: 0, onComplete:function()
+					{
+						$(".vid").removeClass("on-state").hide();
+						vid.load();
+					}});
+				});
+
+				$("#cscene4 .btn-sound").click(function()
+				{
+					var audio = document.getElementById('audio');
+					audio.play();
+				});
+
+				$("#cscene4 .spot").click(function()
+				{
+					if ( $("#cscene4 .preview").hasClass("on-state") )
+					{
+						TweenMax.fromTo($("#cscene4 .preview"), 1, {scale: 1, opacity: 1}, {scale: 0.1, opacity: 0, ease:Elastic.easeOut, onComplete:function()
+						{
+							$("#cscene4 .preview").removeClass("on-state");
+						}});
+					}
+					else
+					{
+						TweenMax.fromTo($("#cscene4 .preview"), 1, {scale: 0.1, opacity: 0}, {scale: 1, opacity: 1, ease:Elastic.easeOut, onComplete:function()
+						{
+							$("#cscene4 .preview").addClass("on-state");
+						}});
+					}
+				});
+
+				$("#cscene4 .btn-left").click(function()
+				{
+					if ( chili_inside_index > 1 )
+					{
+						chili_inside_index -= 1;
+						chili_change_state()
+					}
+
+					checkArrow();
+				});
+
+				$("#cscene4 .btn-right").click(function()
+				{
+					if ( chili_inside_index < 8 )
+					{
+						chili_inside_index += 1;
+						chili_change_state()
+					}
+
+					checkArrow()
+				});
+
+				$(".vid").click(function()
+				{
+					//
+				});
+
+				checkArrow();
+
+				loopHitem( $("#cscene4 .h-item") );
+			}
+
+			function loopHitem( item )
+			{
+				TweenMax.to(item, 0.1, { delay: 2, scale: 1.2, onComplete:function()
+				{
+					TweenMax.to(item, 0.1, { scale: 1, onComplete:function()
+					{
+						TweenMax.to(item, 0.1, { scale: 1.2, onComplete:function()
+						{
+							TweenMax.to(item, 0.1, { scale: 1, onComplete:function()
+							{
+								loopHitem( item );
+							}});
+						}});
+					}});
+				}});
+			}
+
 			function scene_intro()
 			{
-				$("body, #cscene1").css("background-image", "url('image/scene1/01.png')");
+				setBackground( "image/scene1/01.png" );
 
 				TweenMax.to($(".font-z"), 0, {scale: 0.5, rotation:100, opacity: 0, onComplete: function()
 				{
@@ -212,6 +362,7 @@
 
 			function scene_menu()
 			{
+				setBackground( "image/scene1/01.png" );
 				$("#cscene2").show().css("opacity", 1);
 
 				TweenMax.to($("#cscene2 .menu"), 0, {scale: 0.1, opacity: 0, onComplete: function()
@@ -239,6 +390,9 @@
 
 			function scene_chili()
 			{
+				// setBackground( "image/scene3/19.png" );
+				setBackground( "image/scene1/01.png" );
+
 				TweenMax.to($("#cscene3 .menu1"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
 				{
 					TweenMax.to($("#cscene3 .menu1"), 2, {delay: 0, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
@@ -296,9 +450,114 @@
 					runFunction( next_scene );
 				}});
 			}
+
+			function scene_chili_inside()
+			{
+				changeAll();
+				checkArrow();
+
+				$("#cscene4 .spot").css( chili_spot_pos[ chili_inside_index-1 ] );
+
+				TweenMax.fromTo($("#cscene4 .btn-back"), 1, {scale: 0.1, opacity: 0}, {delay: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				TweenMax.fromTo($("#cscene4 .chili"), 1, {scale: 0.1, opacity: 0}, {delay: 0.4, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				TweenMax.fromTo($("#cscene4 .text"), 1, {scale: 0.5, opacity: 0}, {delay: 0.2, scale: 1, opacity: 1, ease:Elastic.easeOut});
+
+				TweenMax.fromTo($("#cscene4 .spot"), 1, {scale: 1.3, opacity: 0}, {delay: 0.5, scale: 1, opacity: 1});
+
+				TweenMax.fromTo([$("#cscene4 .btn-sound"), $("#cscene4 .btn-left"), $("#cscene4 .btn-right"), $("#cscene4 .btn-fire")], 1, {scale: 0.5, opacity: 0}, {delay: 0.7, scale: 1, opacity: 1, ease:Elastic.easeOut});
+
+				TweenMax.to($("#cscene4 .preview"), 0, {scale: 0.1, opacity: 0});
+
+				$("#cscene4").show().css("opacity", 1);
+			}
+
+			function chili_change_state()
+			{
+				TweenMax.to($("#cscene4 .spot"), 0.5, {css: chili_spot_pos[ chili_inside_index-1 ] });
+				TweenMax.to($("#cscene4 .text"), 0.3, { y: 100, opacity: 0, onComplete:function()
+				{
+					changeAll();
+					TweenMax.to($("#cscene4 .text"), 0.3, {y: 0, opacity: 1});
+				}});
+
+				if ( $("#cscene4 .preview").hasClass("on-state") )
+				{
+					TweenMax.to($("#cscene4 .preview"), 1, { rotationY: 1080, onComplete:function()
+					{
+						TweenMax.to($("#cscene4 .preview"), 0, {rotationY: 0, ease:Elastic.easeOut});
+					}});
+				}
+			}
+
+			function checkArrow()
+			{
+				if ( chili_inside_index == 1 )
+				{
+					$("#cscene4 .btn-left").hide();
+					$("#cscene4 .btn-right").show();
+				}
+				else if ( chili_inside_index == 8 )
+				{
+					$("#cscene4 .btn-left").show();
+					$("#cscene4 .btn-right").hide();
+				}
+				else
+				{
+					$("#cscene4 .btn-left").show();
+					$("#cscene4 .btn-right").show();
+				}
+
+				if ( chili_inside_index >= 6 )
+				{
+					$("#cscene4 .btn-sound").hide();
+				}
+				else
+				{
+					$("#cscene4 .btn-sound").show();
+				}
+
+				if ( chili_inside_index == 5 )
+				{
+					$("#cscene4 .btn-fire").show();
+				}
+				else
+				{
+					$("#cscene4 .btn-fire").hide();
+				}
+			}
+
+			function changeAll()
+			{
+				setBackground( chili_bg[ chili_inside_index-1 ] );
+
+				$("#cscene4 .text").attr("src", "image/scene4/" + chili_inside_index + "/text.png");
+				$("#cscene4 .preview").attr("src", "image/scene4/" + chili_inside_index + "/preview.png");
+				$("#audio source").attr( "src", "image/scene4/" + chili_inside_index + "/sound.mp3" );
+
+				var audio = document.getElementById('audio');
+
+				audio.load();
+			}
+
+			function endSceneChiliInside( next_scene )
+			{
+				TweenMax.to($("#cscene4 .text"), 0.3, { scale: 0.5, opacity: 0});
+
+				TweenMax.to($("#cscene4 .chili"), 0.3, { delay: 0.2, scale: 0.5, opacity: 0});
+
+				TweenMax.to($("#cscene4 .btn"), 0.3, { delay: 0.4, scale: 0.5, opacity: 0, onComplete:function()
+				{
+					$("#cscene4").hide().css("opacity",0);
+					runFunction( next_scene );
+				}});
+			}
 		</script>
 	</head>
 	<body>
+		<audio autoplay loop>
+			<source src="music/sound.mp3" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
 		<div id="wrap">
 			<div class="container" id="cscene1">
 				<div id="scene1">
@@ -357,9 +616,40 @@
 				<div class="menu menu9">
 					<img class="o1" src="image/scene3/19.png">
 					<img class="btn btn-build" src="image/scene3/09.png">
-					<img class="btn btn-back" src="image/scene3/back.png">
+					<img class="btn btn-main" src="image/main.png">
 				</div>
 			</div>
+			<div class="container" id="cscene4">
+				<img class="btn btn-back" src="image/back.png">
+
+				<img class="chili" src="image/scene4/chili.png">
+				<img class="h-item btn spot spot1" src="image/scene4/spot.png">
+
+				<img class="preview" src="">
+
+				<img class="text" src="">
+				<img class="btn h-item btn-sound" src="image/scene4/05.png">
+
+				<img class="btn btn-fire" src="image/scene4/06.png">
+
+				<img class="btn btn-left" src="image/scene4/03.png">
+				<img class="btn btn-right" src="image/scene4/04.png">
+
+				<audio id="audio" controls>
+					<source src="" type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
+			</div>
+		</div>
+		<div class="vid">
+			<div class="vid-panel">
+				<video id="video">
+					<source src="video/zaap.mp4" type="video/mp4">
+					<source src="video/zaap.webm" type="video/webm">
+					Your browser does not support HTML5 video.
+				</video>
+			</div>
+			<img class="btn-close" src="image/back.png" style="top: 20px; right: 20px; width: 50px; position: absolute; cursor: pointer;">
 		</div>
 	</body>
 </html>
