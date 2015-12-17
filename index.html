@@ -1,6 +1,8 @@
 <html>
 	<head>
 		<title>ZAAP</title>
+		<link id="favicon" rel="icon" type="image/ico" sizes="16x16" href="icon.ico">
+		<link id="favicon2x" rel="icon" type="image/png" sizes="32x32" href="icon.png">
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<script src="lib/interact.js"></script>
 		<script src="lib/jquery.min.js"></script>
@@ -24,6 +26,7 @@
 			{
 				setup_scene_intro();
 				setup_scene_menu();
+				setup_scene_chili();
 			}
 
 			function runFunction( name )
@@ -67,7 +70,97 @@
 
 				$("#cscene2 .menu2").click(function()
 				{
-					endSceneMenu( "scene_intro" );
+					endSceneMenu( "scene_chili" );
+				});
+
+				$("#cscene2 .menu1").hover(function()
+				{
+					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 5, ease:Elastic.easeOut });
+					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: -30, rotation: -20, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 0, ease:Elastic.easeOut });
+					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: 0, rotation: 0, ease:Elastic.easeOut });
+				});
+
+				$("#cscene2 .menu2").hover(function()
+				{
+					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 50, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 0, ease:Elastic.easeOut });
+				});
+
+				$("#cscene2 .menu").hover(function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1.5, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1, ease:Elastic.easeOut });
+				});
+			}
+
+			function setup_scene_chili()
+			{
+				$("#cscene3 .menu1").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_1" );
+				});
+
+				$("#cscene3 .menu2").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_2" );
+				});
+
+				$("#cscene3 .menu3").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_3" );
+				});
+
+				$("#cscene3 .menu4").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_4" );
+				});
+
+				$("#cscene3 .menu5").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_5" );
+				});
+
+				$("#cscene3 .menu6").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_6" );
+				});
+
+				$("#cscene3 .menu7").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_7" );
+				});
+
+				$("#cscene3 .menu8").click(function()
+				{
+					endSceneChiliMenu( "scene_chili_8" );
+				});
+
+				$("#cscene3 .menu9 .btn-back").click(function()
+				{
+					endSceneChiliMenu( "scene_menu" );
+				});
+
+				$("#cscene3 .menu").hover(function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1.2, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($(this).find(".text"), 1, { scale: 1, ease:Elastic.easeOut });
+				});
+
+				$("#cscene3 .menu9 .btn").hover(function()
+				{
+					TweenMax.to($(this), 1, { scale: 1.2, ease:Elastic.easeOut });
+				}, function()
+				{
+					TweenMax.to($(this), 1, { scale: 1, ease:Elastic.easeOut });
 				});
 			}
 
@@ -123,41 +216,83 @@
 
 				TweenMax.to($("#cscene2 .menu"), 0, {scale: 0.1, opacity: 0, onComplete: function()
 				{
-					TweenMax.to($("#cscene2 .menu"), 1, {delay: 0.7, scale: 1, opacity: 1, ease:Elastic.easeOut});
+					TweenMax.to($("#cscene2 .menu"), 1, {delay: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
 				}});
-
-				$("#cscene2 .menu1").hover(function()
-				{
-					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 5, ease:Elastic.easeOut });
-					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: -30, rotation: -20, ease:Elastic.easeOut });
-				}, function()
-				{
-					TweenMax.to($("#cscene2 .menu1 .o1"), 1, { rotation: 0, ease:Elastic.easeOut });
-					TweenMax.to($("#cscene2 .menu1 .o2"), 1, { x: 0, rotation: 0, ease:Elastic.easeOut });
-				});
-
-				$("#cscene2 .menu2").hover(function()
-				{
-					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 50, ease:Elastic.easeOut });
-				}, function()
-				{
-					TweenMax.to($("#cscene2 .menu2 .o2"), 1, { y: 0, ease:Elastic.easeOut });
-				});
-
-				$("#cscene2 .menu").hover(function()
-				{
-					TweenMax.to($(this).find(".text"), 1, { scale: 1.5, ease:Elastic.easeOut });
-				}, function()
-				{
-					TweenMax.to($(this).find(".text"), 1, { scale: 1, ease:Elastic.easeOut });
-				});
 			}
 
 			function endSceneMenu( next_scene )
 			{
-				TweenMax.to($("#cscene2 .menu"), 1, {scale: 0.1, opacity: 0, onComplete:function ()
+				TweenMax.to($("#cscene2 .menu1"), 0.2, {scale: 1.2, onComplete:function()
 				{
-					$("#cscene2").hide().css("opacity",0);
+					TweenMax.to($("#cscene2 .menu1"), 0.3, { scale: 0.7, opacity: 0 });
+				}});
+
+				TweenMax.to($("#cscene2 .menu2"), 0.2, {delay: 0.1, scale: 1.2, onComplete:function()
+				{
+					TweenMax.to($("#cscene2 .menu2"), 0.3, { scale: 0.7, opacity: 0, onComplete:function ()
+					{
+						$("#cscene2").hide().css("opacity",0);
+						runFunction( next_scene );
+					}});
+				}});
+			}
+
+			function scene_chili()
+			{
+				TweenMax.to($("#cscene3 .menu1"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu1"), 2, {delay: 0, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu2"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu2"), 2, {delay: 0.2, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu3"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu3"), 2, {delay: 0.4, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu4"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu4"), 2, {delay: 0.6, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu5"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu5"), 2, {delay: 0.8, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu6"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu6"), 2, {delay: 1.0, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu7"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu7"), 2, {delay: 1.2, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu8"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu8"), 2, {delay: 1.4, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				TweenMax.to($("#cscene3 .menu9"), 0, {scale: 0.1, rotation: -100, opacity: 0, onComplete: function()
+				{
+					TweenMax.to($("#cscene3 .menu9"), 2, {delay: 1.6, rotation: 0, scale: 1, opacity: 1, ease:Elastic.easeOut});
+				}});
+
+				$("#cscene3").show().css("opacity", 1);
+			}
+
+			function endSceneChiliMenu( next_scene )
+			{
+				TweenMax.to($("#cscene3 .menu"), 1, {scale: 0, opacity: 0, ease:Elastic.easeIn, onComplete:function ()
+				{
+					$("#cscene3").hide().css("opacity",0);
+					TweenMax.to($("#scene3 .menu"), 0, { scale: 1, opacity: 1});
 					runFunction( next_scene );
 				}});
 			}
@@ -184,6 +319,45 @@
 					<img class="o1" src="image/scene2/02.png">
 					<img class="o2" src="image/scene2/01.png">
 					<img class="text" src="image/scene2/03.png">
+				</div>
+			</div>
+			<div class="container" id="cscene3">
+				<div class="menu menu1">
+					<img class="o1" src="image/scene3/11.png">
+					<img class="text" src="image/scene3/01.png">
+				</div>
+				<div class="menu menu2">
+					<img class="o1" src="image/scene3/12.png">
+					<img class="text" src="image/scene3/02.png">
+				</div>
+				<div class="menu menu3">
+					<img class="o1" src="image/scene3/13.png">
+					<img class="text" src="image/scene3/03.png">
+				</div>
+				<div class="menu menu4">
+					<img class="o1" src="image/scene3/14.png">
+					<img class="text" src="image/scene3/04.png">
+				</div>
+				<div class="menu menu5">
+					<img class="o1" src="image/scene3/15.png">
+					<img class="text" src="image/scene3/05.png">
+				</div>
+				<div class="menu menu6">
+					<img class="o1" src="image/scene3/16.png">
+					<img class="text" src="image/scene3/06.png">
+				</div>
+				<div class="menu menu7">
+					<img class="o1" src="image/scene3/17.png">
+					<img class="text" src="image/scene3/07.png">
+				</div>
+				<div class="menu menu8">
+					<img class="o1" src="image/scene3/18.png">
+					<img class="text" src="image/scene3/08.png">
+				</div>
+				<div class="menu menu9">
+					<img class="o1" src="image/scene3/19.png">
+					<img class="btn btn-build" src="image/scene3/09.png">
+					<img class="btn btn-back" src="image/scene3/back.png">
 				</div>
 			</div>
 		</div>

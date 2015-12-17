@@ -130,3 +130,111 @@ html, body, div
 	width: 80%;
 	margin: 0 auto;
 }
+
+#cscene3 .menu
+{
+	top: 0px;
+	left: 0px;
+	width: 33.33%;
+	height: 33.33%;
+	position: absolute;
+	cursor: pointer;
+}
+
+#cscene3 .menu .o1
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+#cscene3 .menu .text
+{
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	height: 12%;
+	margin: auto;
+	position: absolute;
+}
+
+#cscene3 .menu1
+{
+	top: 0%;
+	left: 0%;
+}
+
+#cscene3 .menu2
+{
+	top: 0%;
+	left: 33.33%;
+}
+
+#cscene3 .menu3
+{
+	top: 0%;
+	left: 66.66%;
+}
+
+#cscene3 .menu4
+{
+	top: 33.33%;
+	left: 0%;
+}
+
+#cscene3 .menu5
+{
+	top: 33.33%;
+	left: 33.33%;
+}
+
+#cscene3 .menu5 .text
+{
+	height: 25%;
+}
+
+#cscene3 .menu6
+{
+	top: 33.33%;
+	left: 66.66%;
+}
+
+#cscene3 .menu7
+{
+	top: 66.66%;
+	left: 0%;
+}
+
+#cscene3 .menu8
+{
+	top: 66.66%;
+	left: 33.33%;
+}
+
+#cscene3 .menu9
+{
+	top: 66.66%;
+	left: 66.66%;
+	cursor: default;
+}
+
+#cscene3 .menu9 .btn
+{
+	top: 0px;
+	bottom: 0px;
+	width: 35%;
+	margin: auto 0;
+	position: absolute;
+	cursor: pointer;
+}
+
+#cscene3 .menu9 .btn-build
+{
+	left: 10%;
+}
+
+#cscene3 .menu9 .btn-back
+{
+	right: 10%;
+}
