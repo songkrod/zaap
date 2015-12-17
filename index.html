@@ -545,6 +545,11 @@
 
 				TweenMax.to($("#cscene4 .chili"), 0.3, { delay: 0.2, scale: 0.5, opacity: 0});
 
+				if ( $("#cscene4 .preview").hasClass("on-state") )
+				{
+					TweenMax.to($("#cscene4 .preview"), 0.3, { delay: 0.4, scale: 0.5, opacity: 0});
+				}
+
 				TweenMax.to($("#cscene4 .btn"), 0.3, { delay: 0.4, scale: 0.5, opacity: 0, onComplete:function()
 				{
 					$("#cscene4").hide().css("opacity",0);
